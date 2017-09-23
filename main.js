@@ -11,18 +11,31 @@ function mean2(val1, val2, val3) {
     return (val1 + val2) / 2
 }
 
-function discreteMedian(arr, freqSum, length) {
+function discreteMedian(arr, freqArr, length) {
 
     var median = Math.floor(length / 2)
 
     if (length % 2 == 0) {
-        for (var i = 0, j = 0; i <= median; i += freqSum[j], j++) 
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
             return arr[j];
     }
     else {
-        for (var i = 0, j = 0; i <= median; i += freqSum[j], j++) 
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
             return mean2(arr[j], arr[j+1], 0) 
     }
+}
+
+function discreteMode(arr, freqArr) {
+    var max = 0, pos = 0;
+
+    for (var i = 0; i < freqArr.length; i++) {
+        if (freqArr[i] > max) {
+            max = freqArr[i];
+            pos = i;
+        }        
+    }
+
+    return arr[pos]
 }
 
 
@@ -118,9 +131,12 @@ function discrete() {
 
     var discreteMean = mean(discreteProductArr, freqSum )
     var discreteMedianVal = discreteMedian(discreteArr, discreteFrequencyArr, freqSum)
+    var discreteModeVal = discreteMode(discreteArr, discreteFrequencyArr)
 
     $("#discreteMean").text("Mean: " + discreteMean)
     $("#discreteMedian").text("Median: " + discreteMedianVal)
+    $("#discreteMode").text("Mode: " + discreteModeVal)
+    
 
     if (discreteMean == discreteMedianVal) {
         $("#discreteDistribution").text("The data has a symmetrical distribution")
