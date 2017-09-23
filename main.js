@@ -7,21 +7,21 @@ function mean(arr, divisor) {
     return sum / divisor
 }
 
-function mean(val1, val2, val3) {
+function mean2(val1, val2, val3) {
     return (val1 + val2) / 2
 }
 
-function discreteMedian(arr, freqArr, length) {
+function discreteMedian(arr, freqSum, length) {
 
     var median = Math.floor(length / 2)
 
     if (length % 2 == 0) {
-        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
+        for (var i = 0, j = 0; i <= median; i += freqSum[j], j++) 
             return arr[j];
     }
     else {
-        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            return mean(arr[j], arr[j+1], 0) 
+        for (var i = 0, j = 0; i <= median; i += freqSum[j], j++) 
+            return mean2(arr[j], arr[j+1], 0) 
     }
 }
 
@@ -65,6 +65,11 @@ function addDiscreteProductField(val) {
     discreteProducts.append("<p>" + val + "</p>")
 }
 
+function getProducts(vals, frequencies, products) {
+    for (var i = 0; i < frequencies.length; i++) {
+        products.push(vals[i] * frequencies[i])
+    } 
+}
 
 //grab values and put them into an array
 //parse them to find the products and length
@@ -75,21 +80,57 @@ function discrete() {
     clearArrs()
     $(".discreteData").each(function() {
         var val = $(this).val();
-        if (val != '' || val != ' ' || val != undefined || val != null)
+        if (val != '' || val != ' ' || val != undefined || val != null || !Number.isNaN(val))
             discreteArr.push(parseFloat(val));
     })    
 
      $(".discreteFrequency").each(function() {
         var val = $(this).val();
-        if (val != '' || val != ' ' || val != undefined || val != null)
+        if (val != '' || val != ' ' || val != undefined || val != null || !Number.isNaN(val))
             discreteFrequencyArr.push(parseFloat(val));
     })    
     console.log(discreteArr, discreteFrequencyArr)
     $('#discreteDataLength').text(" Actual Data: Length - " + discreteArr.length)
-    $('#discreteFreqLength').text(" Frequency: Length - " + discreteFrequencyArr.length)
+    var freqSum = 0;
+    for (var i = 0; i < discreteFrequencyArr.length; i++) {
+        freqSum += discreteFrequencyArr[i]
+    }
+    $('#discreteFreqLength').text(" Frequency: Sum - " + freqSum)
     
+    if (discreteArr.length != discreteFrequencyArr.length) {
+        $('#discreteErrors').text("The data is differently sized from the frequencies")
+        return
+    }
+    
+    getProducts(discreteArr, discreteFrequencyArr, discreteProductArr)
+    
+    var productSum = 0;
+
+    for (var i = 0; i < discreteProductArr; i++) {
+        productSum += discreteProductArr;
+    }
+
+    $('#discreteProductSum').text(" Product: Sum - " + productSum)
+
+    for (var i = 0; i < discreteProductArr.length; i++)
+        addDiscreteProductField(discreteProductArr[i])
     
 
+    var discreteMean = mean(discreteProductArr, freqSum )
+    var discreteMedianVal = discreteMedian(discreteArr, discreteFrequencyArr, freqSum)
+
+    $("#discreteMean").text("Mean: " + discreteMean)
+    $("#discreteMedian").text("Median: " + discreteMedianVal)
+
+    if (discreteMean == discreteMedianVal) {
+        $("#discreteDistribution").text("The data has a symmetrical distribution")
+    }
+    else if (discreteMean > discreteMedianVal) {
+        $("#discreteDistribution").text("The data has a positively skewed distribution")
+    }
+    else {
+        $("#discreteDistribution").text("The data has a negatively skewed distribution")
+    }
 
 }
 

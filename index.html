@@ -17,15 +17,24 @@
             <section class="section">
                 <div class="container discrete">
                     <h1 class='title'> Discrete Numerical </h1>
-                    <button class='button is-info' id='discrete-clear'> Clear fields </button>
-                    <button class='button is-primary' id='discrete-collect'> Calculate</button> 
+                    <h1 id='discreteErrors' class='is-danger'> This is where the errors will go bro </h1>                    
                     <h3> Name </h3>
                     <input class='input' type='text' placeholder='Horse weight (kg)?'>
+                    <div class='summary'>
+                        <p id='discreteMean'> Mean: </p>
+                        <p id='discreteMedian'> Median: </p>
+                        <p id='discreteMode'> Mode: </p>
+                        <p id='discreteDistribution'> Distribution: </p>
+                    </div>
+
+                    <button class='button is-info' id='discrete-clear'> Clear fields </button>
+                    <button class='button is-primary' id='discrete-collect'> Calculate</button> 
+                    <button class='button is-primary' id='discreteDataAdder'> Add data</button>
+                    <button class='button is-primary' id='discreteFAdder'> Add frequency</button>
                     <hr>
                     <div class="columns">
                         <div class='column'>
                             <h3 id='discreteDataLength'> Actual data  </h3>
-                            <button class='button is-primary' id='discreteDataAdder'> Add value</button>
                             <div id='discrete-data'>
 
                             </div>
@@ -35,12 +44,11 @@
                             <h3 id='discreteFreqLength'> Frequency </h3>
                             <div id='discrete-frequencies'>
 
-                                <button class='button is-primary' id='discreteFAdder'> Add value</button>
                             </div>
                         </div>
 
                         <div class='column'>
-                            <h3> Product </h3>
+                            <h3 id='discreteProductSum'> Product </h3>
                             <div id='discrete-product'>
                                  
                             </div>
