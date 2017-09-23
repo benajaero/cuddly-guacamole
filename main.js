@@ -35,10 +35,19 @@ var discreteFrequencyAdder = $('#discreteFAdder')
 var discreteClear = $('#discrete-clear')
 var discreteCollect = $('#discrete-collect')
 
+var discreteArr = Array(), discreteFrequencyArr = Array(), discreteProductArr = Array()
+
+function clearArrs() {
+    discreteArr.length = 0;
+    discreteFrequencyArr.length = 0
+    discreteProductArr.length = 0
+}
+
 function clearDiscreteFields() {
     discreteData.empty()
     discreteFrequencies.empty()
     discreteProducts.empty()
+    clearArrs()
 }
 
 function addDiscreteField() {
@@ -56,9 +65,34 @@ function addDiscreteProductField(val) {
     discreteProducts.append("<p>" + val + "</p>")
 }
 
+
+//grab values and put them into an array
+//parse them to find the products and length
+//fill it up
+//then use them to find mean, median and mode
+
 function discrete() {
+    clearArrs()
+    $(".discreteData").each(function() {
+        var val = $(this).val();
+        if (val != '' || val != ' ' || val != undefined || val != null)
+            discreteArr.push(parseFloat(val));
+    })    
+
+     $(".discreteFrequency").each(function() {
+        var val = $(this).val();
+        if (val != '' || val != ' ' || val != undefined || val != null)
+            discreteFrequencyArr.push(parseFloat(val));
+    })    
+    console.log(discreteArr, discreteFrequencyArr)
+    $('#discreteDataLength').text(" Actual Data: Length - " + discreteArr.length)
+    $('#discreteFreqLength').text(" Frequency: Length - " + discreteFrequencyArr.length)
+    
+    
+
 
 }
+
 discreteDataAdder.click(addDiscreteField)
 discreteFrequencyAdder.click(addDiscreteFrequencyField)
 discreteClear.click(clearDiscreteFields)
