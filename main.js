@@ -28,12 +28,16 @@ function discreteMedian(arr, freqArr, length) {
 
 
 
-var discreteData = document.getElementById('discrete-data')
-var discreteFrequencies = document.getElementById('discrete-frequencies')
-var discreteProducts = document.getElementById('discrete-product')
-var discreteDataAdder = document.getElementById('discreteDataAdder')
-var discreteFrequencyAdder = document.getElementById('discreteFrequencyAdder')
-var discreteClear = document.getElementById('discrete-clear')
+var discreteData = $('#discrete-data')
+var discreteFrequencies = $('#discrete-frequencies')
+var discreteProducts = $('#discrete-product')
+var discreteDataAdder = $('#discreteDataAdder')
+var discreteFrequencyAdder = $('#discreteFrequencyAdder')
+var discreteClear = $('#discrete-clear')
+
+function clearDiscreteFields() {
+    discreteData.empty()
+}
 
 function addDiscreteField() {
     
@@ -43,5 +47,7 @@ function addDiscreteFrequencyField() {
 
 }
 
-discreteDataAdder.addEventListener("click", addDiscreteField)
-discreteFrequencyAdder.addEventListener("click", addDiscreteFrequencyField)
+discreteDataAdder.click(addDiscreteField)
+discreteFrequencyAdder.click(addDiscreteFrequencyField)
+discreteClear.click(clearDiscreteFields)
+
