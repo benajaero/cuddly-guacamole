@@ -27,27 +27,41 @@ function discreteMedian(arr, freqArr, length) {
 
 
 
-
 var discreteData = $('#discrete-data')
 var discreteFrequencies = $('#discrete-frequencies')
 var discreteProducts = $('#discrete-product')
 var discreteDataAdder = $('#discreteDataAdder')
-var discreteFrequencyAdder = $('#discreteFrequencyAdder')
+var discreteFrequencyAdder = $('#discreteFAdder')
 var discreteClear = $('#discrete-clear')
+var discreteCollect = $('#discrete-collect')
 
 function clearDiscreteFields() {
     discreteData.empty()
+    discreteFrequencies.empty()
+    discreteProducts.empty()
 }
 
 function addDiscreteField() {
-    
+    console.log("Adding field")
+    discreteData.append("<div class='field'><div class='control'><input class='input discreteData' type='text' placeholder='number here'></div></div>") 
 }
 
 function addDiscreteFrequencyField() {
+    console.log("Adding field")
+    discreteFrequencies.append("<div class='field'><div class='control'><input class='input discreteFrequency' type='text' placeholder='number here'></div></div>") 
 
 }
 
+function addDiscreteProductField(val) {
+    discreteProducts.append("<p>" + val + "</p>")
+}
+
+function discrete() {
+
+}
 discreteDataAdder.click(addDiscreteField)
 discreteFrequencyAdder.click(addDiscreteFrequencyField)
 discreteClear.click(clearDiscreteFields)
+discreteCollect.click(discrete)
+
 
