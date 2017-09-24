@@ -22,14 +22,25 @@ function sortTogether(array1, array2) {
 //only difference should be that these two return an array of vals
 //oh yea, t stands for temporary
 
-function classMode() {
+function classModeFunc(arr, tarr, freqArr) {
+    var max = 0, pos = 0;
+    var r = []
+
+    for (var i = 0; i < freqArr.length; i++) {
+        if (freqArr[i] > max) {
+            max = freqArr[i];
+            pos = i;
+        }        
+    }
+    r = [arr[pos], tarr[pos]]
+    return r
 
 }
 
-function classMedian(tarr, ttarr, tfreqArr, length) {
+function classMedianFunc(tarr, ttarr, tfreqArr, length) {
     // we need to duplicate arrs
     var arr = tarr.slice(0) 
-    var topArr = tarr.slice(0)
+    var topArr = ttarr.slice(0)
     var freqArr = tfreqArr.slice(0)
     var ttfreqArr = tfreqArr.slice(0)
     
@@ -312,6 +323,19 @@ function lengthsAndSums() {
     $("#classProductSum").text("Product - " + classProductSum)
 
     var classMean = mean(classProductsArr, freqClassSum) 
+    var classMedian = classMedianFunc(classBottomArr, classTopArr, classFreqArr, classFreqArr.length)
+    var classMode = classModeFunc(classBottomArr, classTopArr, classFreqArr)
+
+    $("#classMean").text("Mean: " + classMean)
+    $("#classMedian").text("Median: " + classMedian[0] + " - " + classMedian[1])
+    $("#classMode").text("Mode: " + classMode[0] + " - " + classMode[1])
+
+    if (classMean < classMedian[0]) 
+        $("#classDistribution").text("The data has a negatively skewed distribution")
+    else if (classMean > classMedian[1])
+        $("#classDistribution").text("The data has a positively skewed distribution")
+    else
+        $("#classDistribution").text("The data has a symmetrical distribution")
 }
 
 function classFunc() {
