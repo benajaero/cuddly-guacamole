@@ -51,17 +51,19 @@ function classMedianFunc(tarr, ttarr, tfreqArr, length) {
     var median = Math.floor(length / 2)
     var r = []
 
-    if (length % 2 == 0) {
-        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) {
+    if (length % 2 != 0) {
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j += 1) {
+            console.log(median,length)
+            console.log(i, j)
             r = [arr[j], topArr[j]]
-            return r
         }
+        return r
     }
     else {
-        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) {
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j += 1 ){
             r = [mean2(arr[j], arr[j+1]), mean2(topArr[j], topArr[j+1])]
-            return r
         }
+        return r
     }
 }
 
@@ -73,9 +75,11 @@ function discreteMedian(tarr, tfreqArr, length) {
     
     var median = Math.floor(length / 2)
 
-    if (length % 2 == 0) {
+    if (length % 2 != 0) {
+        var vall
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            return arr[j];
+            vall = arr[j]
+        return vall
     }
     else {
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
