@@ -19,6 +19,41 @@ function sortTogether(array1, array2) {
 
 }
 
+//only difference should be that these two return an array of vals
+//oh yea, t stands for temporary
+
+function classMode() {
+
+}
+
+function classMedian(tarr, ttarr, tfreqArr, length) {
+    // we need to duplicate arrs
+    var arr = tarr.slice(0) 
+    var topArr = tarr.slice(0)
+    var freqArr = tfreqArr.slice(0)
+    var ttfreqArr = tfreqArr.slice(0)
+    
+    //if input is good then these should be the same
+    sortTogether(arr, freqArr)
+    sortTogether(topArr, ttfreqArr)
+
+    var median = Math.floor(length / 2)
+    var r = []
+
+    if (length % 2 == 0) {
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) {
+            r = [arr[j], topArr[j]]
+            return r
+        }
+    }
+    else {
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) {
+            r = [mean2(arr[j], arr[j+1]), mean2(topArr[j], topArr[j+1])]
+            return r
+        }
+    }
+}
+
 function discreteMedian(tarr, tfreqArr, length) {
     var arr = tarr.slice(0)
     var freqArr = tfreqArr.slice(0)
@@ -79,7 +114,7 @@ function clearDiscreteFields() {
 }
 
 function appendTheThing(appender, thing) {
-    string = "<div class='field'><div class='control'><p>" + thing + "</p></div></div>"
+    string = "<div class='field'><div class='control'><p>" + thing + "</p></div></div><hr>"
     appender.append(string)
 }
 function discreteStackPop() {
@@ -259,16 +294,24 @@ function collect(string, arr) {
     })
 }
 
+
+
 function lengthsAndSums() {
     var freqClassSum = 0
     for (var i = 0; i < classFreqArr.length; i++)
         freqClassSum += classFreqArr[i]
 
+    var classProductSum = 0
+    for (var i = 0; i < classProductsArr.length; i++)
+        classProductSum += classProductsArr[i]
+
     $("#classBottomRangeLength").text("Bottom Range - " + classBottomArr.length)
     $("#classTopRangeLength").text("Top Range - " + classTopArr.length)
     $("#classMeanLength").text("Average - " + classMeanArr.length)
     $("#classFreqLength").text("Frequency - " + freqClassSum)
-    
+    $("#classProductSum").text("Product - " + classProductSum)
+
+    var classMean = mean(classProductsArr, freqClassSum) 
 }
 
 function classFunc() {
