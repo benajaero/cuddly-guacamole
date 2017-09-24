@@ -17,24 +17,54 @@
             <section class="section">
                 <div class="container discrete">
                     <h1 class='title'> Discrete Numerical </h1>
-                    <h1 id='discreteErrors' class='is-danger'> This is where the errors will go bro </h1>                    
-                    <h3> Name </h3>
-                    <input class='input' type='text' placeholder='Horse weight (kg)?'>
-                    <div class='summary'>
-                        <p id='discreteMean'> Mean: </p>
-                        <p id='discreteMedian'> Median: </p>
-                        <p id='discreteMode'> Mode: </p>
-                        <p id='discreteDistribution'> Distribution: </p>
+                    <div class="columns">
+                       <div class="column">
+                          
+                           <h3> Name </h3>
+                           <input class='input' type='text' placeholder='Horse weight (kg)?'>
+
+                           <hr>
+                           <button class='button is-danger' id='discrete-clear'> Clear fields </button>
+                           <button class='button is-danger' id='discrete-pop'> Pop the stack </button>
+                           <hr>
+                           <button class='button is-primary' id='discrete-collect'> Calculate</button> 
+                           <button class='button is-primary' id='discreteDataAdder'> Add data</button>
+                       </div> 
+                       <div class="column">
+                           
+                           <div class='card summary'>
+                               <header class="card-header">
+                                   <p class="card-header-title">
+                                   Calculated information
+                                   </p>
+                               </header>
+                               <div class="card-content">
+                                   <p id='discreteMean'> Mean: </p>
+                                   <p id='discreteMedian'> Median: </p>
+                                   <p id='discreteMode'> Mode: </p>
+                                   <p id='discreteDistribution'> Distribution: </p>
+                               </div>
+                           </div> 
+                       </div>
+                       <div class="column">
+                          <article class="message is-danger">
+                              <div class="message-header is-danger">
+                                  <p> Errors</p> 
+                              </div>
+                              <div class="message-body">
+                                  
+                    <p id='discreteErrors'> This is where the errors will go bro </p>                    
+                              </div>
+                          </article> 
+                       </div>
                     </div>
 
-                    <button class='button is-info' id='discrete-clear'> Clear fields </button>
-                    <button class='button is-primary' id='discrete-collect'> Calculate</button> 
-                    <button class='button is-primary' id='discreteDataAdder'> Add data</button>
-                    <button class='button is-primary' id='discreteFAdder'> Add frequency</button>
+
                     <hr>
                     <div class="columns">
                         <div class='column'>
                             <h3 id='discreteDataLength'> Actual data  </h3>
+                            <hr>
                             <div id='discrete-data'>
 
                             </div>
@@ -42,6 +72,7 @@
 
                         <div class='column'>
                             <h3 id='discreteFreqLength'> Frequency </h3>
+                            <hr>
                             <div id='discrete-frequencies'>
 
                             </div>
@@ -49,6 +80,7 @@
 
                         <div class='column'>
                             <h3 id='discreteProductSum'> Product </h3>
+                            <hr>
                             <div id='discrete-product'>
                                  
                             </div>
@@ -57,11 +89,7 @@
                     </div>
                 </div>
             </section>
-            <section>
-                <div class="container">
-                    <h1 class="title"> Graphs, Charts, Histograms</h1>    
-                </div>
-            </section>
+            
             <script src="./main.js" charset="utf-8"></script>
         </body>
     </html>

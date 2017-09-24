@@ -11,8 +11,20 @@ function mean2(val1, val2, val3) {
     return (val1 + val2) / 2
 }
 
-function discreteMedian(arr, freqArr, length) {
+function sortTogether(array1, array2) {
+    var merged = [];
+    for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]});  }
+    merged.sort(function(o1, o2) { return ((o1.a1 < o2.a1) ? -1 : ((o1.a1 == o2.a1) ? 0 : 1));  });
+    for(var i=0; i<merged.length; i++) { array1[i] = merged[i].a1; array2[i] = merged[i].a2;  }
 
+}
+
+function discreteMedian(tarr, tfreqArr, length) {
+    var arr = tarr.slice(0)
+    var freqArr = tfreqArr.slice(0)
+
+    sortTogether(arr, freqArr)
+    
     var median = Math.floor(length / 2)
 
     if (length % 2 == 0) {
@@ -44,9 +56,9 @@ var discreteData = $('#discrete-data')
 var discreteFrequencies = $('#discrete-frequencies')
 var discreteProducts = $('#discrete-product')
 var discreteDataAdder = $('#discreteDataAdder')
-var discreteFrequencyAdder = $('#discreteFAdder')
 var discreteClear = $('#discrete-clear')
 var discreteCollect = $('#discrete-collect')
+var discretePop = $("#discrete-pop")
 
 var discreteArr = Array(), discreteFrequencyArr = Array(), discreteProductArr = Array()
 
@@ -57,15 +69,24 @@ function clearArrs() {
 }
 
 function clearDiscreteFields() {
-    discreteData.empty()
-    discreteFrequencies.empty()
-    discreteProducts.empty()
-    clearArrs()
+    var answer = prompt("Are you sure?")
+    if (answer.toLowerCase() == "yes" || answer.toLowerCase() == "y") {
+        discreteData.empty()
+        discreteFrequencies.empty()
+        discreteProducts.empty()
+        clearArrs()
+    }
+}
+
+function discreteStackPop() {
+    discreteData.children().last().remove()
+    discreteFrequencies.children().last().remove()
 }
 
 function addDiscreteField() {
     console.log("Adding field")
     discreteData.append("<div class='field'><div class='control'><input class='input discreteData' type='text' placeholder='number here'></div></div>") 
+    addDiscreteFrequencyField()
 }
 
 function addDiscreteFrequencyField() {
@@ -84,13 +105,10 @@ function getProducts(vals, frequencies, products) {
     } 
 }
 
-//grab values and put them into an array
-//parse them to find the products and length
-//fill it up
-//then use them to find mean, median and mode
 
 function discrete() {
     clearArrs()
+    discreteProducts.empty()
     $(".discreteData").each(function() {
         var val = $(this).val();
         if (val != '' || val != ' ' || val != undefined || val != null || !Number.isNaN(val))
@@ -119,8 +137,8 @@ function discrete() {
     
     var productSum = 0;
 
-    for (var i = 0; i < discreteProductArr; i++) {
-        productSum += discreteProductArr;
+    for (var i = 0; i < discreteProductArr.length; i++) {
+        productSum += discreteProductArr[i];
     }
 
     $('#discreteProductSum').text(" Product: Sum - " + productSum)
@@ -151,8 +169,7 @@ function discrete() {
 }
 
 discreteDataAdder.click(addDiscreteField)
-discreteFrequencyAdder.click(addDiscreteFrequencyField)
-discreteClear.click(clearDiscreteFields)
 discreteCollect.click(discrete)
-
+discretePop.click(discreteStackPop)
+discreteClear.click(clearDiscreteFields)
 
