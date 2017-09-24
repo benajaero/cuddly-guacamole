@@ -12,6 +12,7 @@
                 <div class="container">
                     <h1 class="title"> Statistical Automator </h1>                
                     <p class="subtitle"> Fill out the values to calculate the mean, median and <del>maybe</del> the mode </p>
+                    <p class='subtitle'> Continuous is at bottom of the page </p>
                 </div>
             </section>
             <section class="section">
@@ -87,6 +88,98 @@
                         </div>
 
                     </div>
+                    <hr>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container class">
+                    <h1 class='title'> Continuous Numerical - Ranges are inclusive </h1>
+                    <div class="columns">
+                       <div class="column">
+                          
+                           <h3> Name </h3>
+                           <input class='input' type='text' placeholder='BMI of Australians'>
+
+                           <hr>
+                           <button class='button is-danger' id='class-clear'> Clear fields </button>
+                           <button class='button is-danger' id='class-pop'> Pop the stack </button>
+                           <hr>
+                           <button class='button is-primary' id='class-collect'> Calculate</button> 
+                           <button class='button is-primary' id='classDataAdder'> Add data</button>
+                       </div> 
+                       <div class="column">
+                           
+                           <div class='card summary'>
+                               <header class="card-header">
+                                   <p class="card-header-title">
+                                   Calculated information
+                                   </p>
+                               </header>
+                               <div class="card-content">
+                                   <p id='classMean'> Mean: </p>
+                                   <p id='classMedian'> Median: </p>
+                                   <p id='classMode'> Mode: </p>
+                                   <p id='classDistribution'> Distribution: </p>
+                               </div>
+                           </div> 
+                       </div>
+                       <div class="column">
+                          <article class="message is-danger">
+                              <div class="message-header is-danger">
+                                  <p> Errors</p> 
+                              </div>
+                              <div class="message-body">
+                                  
+                    <p id='classErrors'> This is where the errors will go bro </p>                    
+                              </div>
+                          </article> 
+                       </div>
+                    </div>
+
+
+                    <hr>
+                    <div class="columns">
+                        <div class='column'>
+                            <h3 id='classBottomRangeLength'> Bottom Range </h3>
+                            <hr>
+                            <div id='class-bottom'>
+
+                            </div>
+                        </div>
+                        <div class='column'>
+                            <h3 id='classtopRangeLength'> Top Range </h3>
+                            <hr>
+                            <div id='class-top'>
+
+                            </div>
+                        </div>
+
+                        <div class='column'>
+                            <h3 id='classMeanLength'> Average  </h3>
+                            <hr>
+                            <div id='class-mean'>
+
+                            </div>
+                        </div>
+
+                        <div class='column'>
+                            <h3 id='classFreqLength'> Frequency </h3>
+                            <hr>
+                            <div id='class-frequencies'>
+
+                            </div>
+                        </div>
+
+                        <div class='column'>
+                            <h3 id='classProductSum'> Product </h3>
+                            <hr>
+                            <div id='class-product'>
+                                 
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
                 </div>
             </section>
             

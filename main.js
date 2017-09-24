@@ -78,6 +78,10 @@ function clearDiscreteFields() {
     }
 }
 
+function appendTheThing(appender, thing) {
+    string = "<div class='field'><div class='control'><p>" + thing + "</p></div></div>"
+    appender.append(string)
+}
 function discreteStackPop() {
     discreteData.children().last().remove()
     discreteFrequencies.children().last().remove()
@@ -96,7 +100,7 @@ function addDiscreteFrequencyField() {
 }
 
 function addDiscreteProductField(val) {
-    discreteProducts.append("<p>" + val + "</p>")
+    appendTheThing(discreteProducts, val)
 }
 
 function getProducts(vals, frequencies, products) {
@@ -172,4 +176,118 @@ discreteDataAdder.click(addDiscreteField)
 discreteCollect.click(discrete)
 discretePop.click(discreteStackPop)
 discreteClear.click(clearDiscreteFields)
+
+
+
+var classTopData = $('#class-top')
+var classBottomData = $('#class-bottom')
+var classMeanData = $('#class-mean')
+var classFrequencies = $('#class-frequencies')
+var classProducts = $('#class-product')
+var classDataAdder = $('#classDataAdder')
+var classClear = $('#class-clear')
+var classCollect = $('#class-collect')
+var classPop = $('#class-pop')
+
+var classBottomArr = [], classTopArr = [], classMeanArr = [], classFreqArr = [], classProductsArr = []
+
+function clearClassArrs() {
+    classBottomArr.length = 0
+    classTopArr.length = 0
+    classMeanArr.length = 0
+    classFreqArr.length = 0
+    classProductsArr.length = 0
+}
+
+function classPopStack() {
+    classTopData.children().last().remove()
+    classBottomData.children().last().remove()
+    classMeanData.children().last().remove()
+    classProducts.children().last().remove()
+    classFrequencies.children().last().remove()
+}
+
+function clearClassData() {
+    var answer = prompt("Are you sure (type yes or y)")
+    if (answer.toLowerCase() == "yes" || answer.toLowerCase() == 'y') {
+        classBottomData.empty()
+        classTopData.empty()
+        classFrequencies.empty()
+        classMeanData.empty()
+        classProducts.empty()
+    }
+}
+
+function addClassFields() {
+    classBottomData.append("<div class='field'><div class='control'><input class='input classBData' type='text' placeholder='number here'></div></div>") 
+    classTopData.append("<div class='field'><div class='control'><input class='input classTData' type='text' placeholder='number here'></div></div>") 
+    classFrequencies.append("<div class='field'><div class='control'><input class='input classFData' type='text' placeholder='number here'></div></div>") 
+}
+
+function addMean(val) {
+    classMeanData.append("<p>" + val + "</p><hr>")
+    
+}
+
+function addClassProduct(val) {
+    classProducts.append("<p>" + val + "</p><hr>")
+}
+
+function pushProducts() {
+    for (var i = 0; i < classFreqArr.length; i++) {
+        var product = classMeanArr[i] * classFreqArr[i]
+        classProductsArr.push(product)
+        addClassProduct(product)
+    }
+}
+
+function pushMeans(topArr, bottom) {
+    if (topArr.length == bottom.length)
+        for (var i = 0; i < topArr.length; i++) {
+            var meanVal = mean2(topArr[i], bottom[i])
+            classMeanArr.push(meanVal)
+            addMean(meanVal)
+        }
+}
+
+function collect(string, arr) {
+    $(string).each(function() {
+        var val = $(this).val();
+
+        if (val != '' || val != ' ' || val != undefined || val != null || !Number.isNaN(val))
+            arr.push(parseFloat(val))
+    })
+}
+
+function lengthsAndSums() {
+    var freqClassSum = 0
+    for (var i = 0; i < classFreqArr.length; i++)
+        freqClassSum += classFreqArr[i]
+
+    $("#classBottomRangeLength").text("Bottom Range - " + classBottomArr.length)
+    $("#classTopRangeLength").text("Top Range - " + classTopArr.length)
+    $("#classMeanLength").text("Average - " + classMeanArr.length)
+    $("#classFreqLength").text("Frequency - " + freqClassSum)
+    
+}
+
+function classFunc() {
+    clearClassArrs()
+    classProducts.empty()
+    classMeanData.empty()
+
+    collect(".classBData", classBottomArr)
+    collect(".classTData", classTopArr)
+    collect(".classFData", classFreqArr)
+
+    pushMeans(classTopArr, classBottomArr)
+    pushProducts()
+
+    lengthsAndSums()
+    
+}
+classDataAdder.click(addClassFields)
+classClear.click(clearClassData)
+classPop.click(classPopStack)
+classCollect.click(classFunc)
 
