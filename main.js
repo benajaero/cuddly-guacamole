@@ -82,8 +82,54 @@ function discreteMedian(tarr, tfreqArr, length) {
         return vall
     }
     else {
+        var average
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            return mean2(arr[j], arr[j+1], 0) 
+            average = mean2(arr[j], arr[j+1], 0) 
+        return average
+    }
+}
+
+function discreteLowerQuartile(tarr, tfreqArr, length) {
+    var arr = tarr.slice(0)
+    var freqArr = tfreqArr.slice(0)
+
+    sortTogether(arr, freqArr)
+    
+    var median = Math.floor(length / 4)
+
+    if (length % 4 != 0) {
+        var vall
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
+            vall = arr[j]
+        return vall
+    }
+    else {
+        var average
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
+            average = mean2(arr[j], arr[j+1], 0) 
+        return average
+    }
+}
+
+function discreteUpperQuartile(tarr, tfreqArr, length) {
+    var arr = tarr.slice(0)
+    var freqArr = tfreqArr.slice(0)
+
+    sortTogether(arr, freqArr)
+    
+    var median = Math.floor(length / 1.33333 )
+
+    if (length % 1.333333 != 0) {
+        var vall
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
+            vall = arr[j]
+        return vall
+    }
+    else {
+        var average
+        for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
+            average =  mean2(arr[j], arr[j+1], 0) 
+        return average
     }
 }
 
@@ -100,7 +146,12 @@ function discreteMode(arr, freqArr) {
     return arr[pos]
 }
 
+function range(arr) {
+    var tarr = arr.slice(0)
+    tarr.sort()
 
+    return tarr[tarr.length-1] - tarr[0]
+}
 
 var discreteData = $('#discrete-data')
 var discreteFrequencies = $('#discrete-frequencies')
@@ -204,10 +255,17 @@ function discrete() {
     var discreteMean = mean(discreteProductArr, freqSum )
     var discreteMedianVal = discreteMedian(discreteArr, discreteFrequencyArr, freqSum)
     var discreteModeVal = discreteMode(discreteArr, discreteFrequencyArr)
+    var discreteRangeVal = range(discreteArr)
+    var discreteLQ = discreteLowerQuartile(discreteArr, discreteFrequencyArr, freqSum)
+    var discreteUQ = discreteUpperQuartile(discreteArr, discreteFrequencyArr, freqSum)
 
     $("#discreteMean").text("Mean: " + discreteMean)
     $("#discreteMedian").text("Median: " + discreteMedianVal)
     $("#discreteMode").text("Mode: " + discreteModeVal)
+    $("#discreteRange").text("Range: " + discreteRangeVal)
+    $("#discreteLowerQuartile").text("Lower Quartile: " + discreteLQ)
+    $("#discreteUpperQuartile").text("Upper Quartile: " + discreteUQ)
+    $("#discreteInterQuartileRange").text("InterQuartileRange: " + (discreteUQ - discreteLQ))
     
 
     if (discreteMean == discreteMedianVal) {
