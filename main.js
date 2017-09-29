@@ -61,7 +61,7 @@ function classMedianFunc(tarr, ttarr, tfreqArr, length) {
     }
     else {
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j += 1 ){
-            r = [mean2(arr[j], arr[j+1]), mean2(topArr[j], topArr[j+1])]
+            r = [mean2(arr[j], arr[j-1]), mean2(topArr[j], topArr[j-1])]
         }
         return r
     }
@@ -84,7 +84,7 @@ function discreteMedian(tarr, tfreqArr, length) {
     else {
         var average
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            average = mean2(arr[j], arr[j+1], 0) 
+            average = mean2(arr[j], arr[j-1], 0) 
         return average
     }
 }
@@ -106,7 +106,7 @@ function discreteLowerQuartile(tarr, tfreqArr, length) {
     else {
         var average
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            average = mean2(arr[j], arr[j+1], 0) 
+            average = mean2(arr[j], arr[j-1], 0) 
         return average
     }
 }
@@ -128,7 +128,7 @@ function discreteUpperQuartile(tarr, tfreqArr, length) {
     else {
         var average
         for (var i = 0, j = 0; i <= median; i += freqArr[j], j++) 
-            average =  mean2(arr[j], arr[j+1], 0) 
+            average =  mean2(arr[j], arr[j-1], 0) 
         return average
     }
 }
